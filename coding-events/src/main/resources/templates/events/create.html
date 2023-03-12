@@ -1,16 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title>create event</title>
-</head>
-<body>
+<head th:replace="~{fragments :: head}"></head>
+<body class="container">
 
-<h1>Create Event</h1>
+<h1 th:replace="~{fragments :: header}"></h1>
+
+<nav th:replace="~{fragments :: navigation}"></nav>
 
 <form method="post" action="/events/create">
-    <input type="text" name="eventName">
-    <input type="submit" value="Create Event">
+    <div class="form-group">
+        <label>Name
+            <input th:field="${event.name}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.name}"></p>
+    </div><br>
+    <div class="form-group">
+        <label>Description
+            <input th:field="${event.description}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.description}"></p>
+    </div><br>
+    <div class="form-group">
+        <label>Email
+            <input th:field="${event.contactEmail}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.contactEmail}"></p>
+    </div><br>
+    <div class="form-group">
+        <label>Event Type
+            <select th:field="${event.type}">
+                <option th:each="type : ${types}" th:value="${type}"
+                        th:text="${type.displayName}"></option>
+            </select>
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Address
+            <input th:field="${event.address}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.address}"></p>
+    </div><br>
+    <div class="form-group">
+        <label>City
+            <input th:field="${event.city}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.city}"></p>
+    </div><br>
+    <div class="form-group">
+        <label>State
+            <select th:field="${event.state}">
+                <option th:each="state : ${states}" th:value="${state}"
+                        th:text="${state.displayName}"></option>
+            </select>
+        </label>
+    </div><br>
+    <div class="form-group">
+        <label>Zip Code
+            <input th:field="${event.zipCode}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.zipCode}"></p>
+    </div><br>
+    <div class="form-group">Register:
+        <label>
+            <input type="checkbox" th:field="${event.register}">
+        </label>
+        <p class="error" th:errors="${event.register}"></p>
+    </div><br>
+    <div class="form-group">
+        <input type="submit" value="Create Event" class="btn btn-success">
+    </div>
 </form>
 
 </body>
